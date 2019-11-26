@@ -1,0 +1,11 @@
+{
+	"name": "migemo-d",
+	"authors":
+	[
+		"dokutoku"
+	],
+	"description": "cmigemo written in D.",
+	"copyright": "Copyright © 2019, dokutoku",
+	"homepage": "https://gitlab.com/dokutoku/migemo-d",
+	"license": "MIT"
+}
