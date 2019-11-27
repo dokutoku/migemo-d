@@ -13,6 +13,10 @@ private static import core.stdc.string;
 public struct _wordlist_t
 {
 	char* ptr_;
+
+	deprecated
+	alias ptr = ptr_;
+
 	.wordlist_p next;
 }
 
