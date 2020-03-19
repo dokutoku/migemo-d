@@ -7,5 +7,12 @@
 	"description": "cmigemo written in D.",
 	"copyright": "Copyright © 2019, dokutoku",
 	"homepage": "https://gitlab.com/dokutoku/migemo-d",
-	"license": "MIT"
+	"license": "MIT",
+	"buildTypes":
+	{
+		"debug": {"buildOptions": ["betterC", "debugMode", "debugInfo"]},
+		"release": {"buildOptions": ["betterC", "releaseMode", "optimize", "inline"]},
+		"release-debug": {"buildOptions": ["betterC", "releaseMode", "optimize", "inline", "debugInfo"]},
+		"release-nobounds": {"buildOptions": ["betterC", "releaseMode", "optimize", "inline", "noBoundsCheck"]}
+	}
 }

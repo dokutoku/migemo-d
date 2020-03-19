@@ -14,8 +14,9 @@ enum NUM_TRIAL = 10;
 enum DICTDIR = "../../dict";
 enum DICT_FILE = DICTDIR ~ "/migemo-dict\0";
 
+extern (C)
 nothrow @nogc
-int main()
+void main()
 
 	do
 	{
@@ -48,6 +49,4 @@ int main()
 				core.stdc.stdio.printf("\n");
 			}
 		}
-
-		return 0;
 	}

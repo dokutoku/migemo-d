@@ -8,6 +8,13 @@
 	"copyright": "Copyright © 2019, dokutoku",
 	"license": "MIT",
 	"targetType": "executable",
+	"buildTypes":
+	{
+		"debug": {"buildOptions": ["betterC", "debugMode", "debugInfo"]},
+		"release": {"buildOptions": ["betterC", "releaseMode", "optimize", "inline"]},
+		"release-debug": {"buildOptions": ["betterC", "releaseMode", "optimize", "inline", "debugInfo"]},
+		"release-nobounds": {"buildOptions": ["betterC", "releaseMode", "optimize", "inline", "noBoundsCheck"]}
+	},
 	"dependencies":
 	{
 		"migemo-d":
