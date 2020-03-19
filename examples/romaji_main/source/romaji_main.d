@@ -4,9 +4,6 @@
  * Written By:  MURAOKA Taro <koron@tka.att.ne.jp>
  * Last Change: 21-Sep-2004.
  */
-/*
- * gcc -o romaji romaji_main.c ../romaji.c ../wordbuf.c
- */
 module romaji_main.romaji_main;
 
 
