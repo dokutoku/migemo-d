@@ -1,18 +1,12 @@
 {
 	"name": "migemo-test",
-	"authors":
-	 [
-		"dokutoku"
-	],
 	"description": "migemo-d test.",
+	"authors": ["dokutoku"],
 	"copyright": "Copyright © 2019, dokutoku",
 	"license": "MIT",
 	"targetType": "executable",
 	"dependencies":
 	{
-		"migemo-d":
-		{
-			"path": "../../"
-		}
+		"migemo-d": {"path": "../../"}
 	}
 }

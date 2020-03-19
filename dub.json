@@ -1,13 +1,11 @@
 {
 	"name": "migemo-d",
-	"authors":
-	[
-		"dokutoku"
-	],
 	"description": "cmigemo written in D.",
-	"copyright": "Copyright © 2019, dokutoku",
 	"homepage": "https://gitlab.com/dokutoku/migemo-d",
+	"authors": ["dokutoku"],
+	"copyright": "Copyright © 2019, dokutoku",
 	"license": "MIT",
+	"targetType": "library",
 	"buildTypes":
 	{
 		"debug": {"buildOptions": ["betterC", "debugMode", "debugInfo"]},

@@ -1,18 +1,12 @@
 {
 	"name": "romaji-main",
-	"authors":
-	 [
-		"dokutoku"
-	],
 	"description": "migemo-d romaji test.",
+	"authors": ["dokutoku"],
 	"copyright": "Copyright © 2019, dokutoku",
 	"license": "MIT",
 	"targetType": "executable",
 	"dependencies":
 	{
-		"migemo-d":
-		{
-			"path": "../../"
-		}
+		"migemo-d": {"path": "../../"}
 	}
 }
