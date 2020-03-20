@@ -194,7 +194,7 @@ public void mnode_close(.mtree_p mtree)
 		}
 	}
 
-pragma(inline, true)
+//pragma(inline, true)
 nothrow @nogc
 package .mnode* search_or_new_mnode(.mtree_p mtree, migemo_d.wordbuf.wordbuf_p buf)
 
