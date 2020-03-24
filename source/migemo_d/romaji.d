@@ -525,10 +525,9 @@ public char* romaji_convert2(.romaji* object, const (char)* string_, char** ppst
 			buf = migemo_d.wordbuf.wordbuf_open();
 
 			if (buf != null) {
-				for (int i = 0; string_[i];) {
-					.romanode* node;
-					int skip;
+				int skip;
 
+				for (int i = 0; string_[i];) {
 					/* 「っ」の判定 */
 					if ((object.fixvalue_xtu != null) && (input[i] == input[i + 1]) && (core.stdc.string.strchr(.ROMAJI_FIXKEY_NONXTU, input[i]) == null)) {
 						++i;
@@ -537,7 +536,7 @@ public char* romaji_convert2(.romaji* object, const (char)* string_, char** ppst
 						continue;
 					}
 
-					node = .romanode_query(object.node, &input[i], &skip, object.char2int);
+					.romanode* node = .romanode_query(object.node, &input[i], &skip, object.char2int);
 
 					debug {
 						if (object.verbose >= 1) {

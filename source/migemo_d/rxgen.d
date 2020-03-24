@@ -263,9 +263,9 @@ public int rxgen_add(.rxgen* object, const (char)* word)
 		}
 
 		.rnode** ppnode = &object.node;
+		uint code;
 
 		while (true) {
-			uint code;
 			int len = .rxgen_call_char2int(object, word, &code);
 			/*core.stdc.stdio.printf("rxgen_call_char2int: code=%08x\n", code);*/
 
@@ -316,7 +316,6 @@ package void rxgen_generate_stub(.rxgen* object, migemo_d.wordbuf.wordbuf_t* buf
 
 	do
 	{
-		char[16] ch;
 		int haschild = 0;
 		int brother = 1;
 		.rnode* tmp;
@@ -343,6 +342,8 @@ package void rxgen_generate_stub(.rxgen* object, migemo_d.wordbuf.wordbuf_t* buf
 		if ((brother > 1) && (haschild > 0)) {
 			migemo_d.wordbuf.wordbuf_cat(buf, &(object.op_nest_in[0]));
 		}
+
+		char[16] ch;
 
 		version (all) {
 			/* 子の無いノードを先に[]によりグルーピング */

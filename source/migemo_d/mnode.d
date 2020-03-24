@@ -184,10 +184,8 @@ public void mnode_close(.mtree_p mtree)
 				.mnode_delete(&mtree.nodes[0]);
 			}
 
-			.mtree_p next;
-
 			while (mtree != null) {
-				next = mtree.next;
+				.mtree_p next = mtree.next;
 				core.stdc.stdlib.free(mtree);
 				mtree = next;
 			}
@@ -206,15 +204,15 @@ package .mnode* search_or_new_mnode(.mtree_p mtree, migemo_d.wordbuf.wordbuf_p b
 
 	do
 	{
-		/* ラベル単語が決定したら検索木に追加 */
-		int ch;
-
 		/* To suppress warning for GCC */
 		.mnode** res = null;
 
 		char* word = migemo_d.wordbuf.WORDBUF_GET(buf);
 		.mnode* root = (mtree.used > 0) ? (&mtree.nodes[0]) : (null);
 		.mnode** ppnext = &root;
+
+		/* ラベル単語が決定したら検索木に追加 */
+		int ch;
 
 		while ((ch = *word) != 0) {
 			res = ppnext;
@@ -417,8 +415,7 @@ public .mtree_p mnode_open(core.stdc.stdio.FILE* fp)
 
 	do
 	{
-		.mtree_p mtree;
-		mtree = cast(.mtree_p)(core.stdc.stdlib.calloc(1, (*mtree).sizeof));
+		.mtree_p mtree = cast(.mtree_p)(core.stdc.stdlib.calloc(1, (*mtree).sizeof));
 		mtree.active = mtree;
 
 		if ((mtree != null) && (fp != null)) {

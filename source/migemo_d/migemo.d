@@ -216,9 +216,9 @@ export int migemo_load(.migemo* obj, int dict_id, const (char)* dict_file)
 
 		if (dict_id == .MIGEMO_DICTID_MIGEMO) {
 			/* migemo辞書読み込み */
-			migemo_d.mnode.mtree_p mtree;
+			migemo_d.mnode.mtree_p mtree = .load_mtree_dictionary2(obj, dict_file);
 
-			if ((mtree = .load_mtree_dictionary2(obj, dict_file)) == null) {
+			if (mtree == null) {
 				return .MIGEMO_DICTID_INVALID;
 			}
 
@@ -334,17 +334,15 @@ export .migemo* migemo_open(const (char)* dict)
 			char[_MAX_PATH] kata_dict;
 			char[_MAX_PATH] h2z_dict;
 			char[_MAX_PATH] z2h_dict;
-			const (char)* tmp;
-			migemo_d.mnode.mtree_p mtree;
 
 			migemo_d.filename.filename_directory(&(dir[0]), dict);
-			tmp = (core.stdc.string.strlen(&(dir[0]))) ? (&(dir[0])) : (".");
+			const (char)* tmp = (core.stdc.string.strlen(&(dir[0]))) ? (&(dir[0])) : (".");
 			.dircat(&(roma_dict[0]), tmp, .DICT_ROMA2HIRA);
 			.dircat(&(kata_dict[0]), tmp, .DICT_HIRA2KATA);
 			.dircat(&(h2z_dict[0]), tmp, .DICT_HAN2ZEN);
 			.dircat(&(z2h_dict[0]), tmp, .DICT_ZEN2HAN);
 
-			mtree = .load_mtree_dictionary2(obj, dict);
+			migemo_d.mnode.mtree_p mtree = .load_mtree_dictionary2(obj, dict);
 
 			if (mtree != null) {
 				obj.mtree = mtree;

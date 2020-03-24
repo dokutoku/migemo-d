@@ -39,15 +39,16 @@ public int filename_base(char* base, const (char)* path)
 
 	do
 	{
-		int i;
 		int len = .my_strlen(path) - 1;
-		int end;
+		int i;
 
 		for (i = len; i >= 0; --i) {
 			if (path[i] == '.') {
 				break;
 			}
 		}
+
+		int end;
 
 		if (i <= 0) {
 			end = len;
@@ -131,8 +132,8 @@ public int filename_extension(char* ext, const (char)* path)
 
 	do
 	{
-		int i;
 		int len = .my_strlen(path);
+		int i;
 
 		for (i = len - 1; i >= 0; --i) {
 			if (path[i] == '.') {
@@ -170,8 +171,8 @@ public int filename_filename(char* name, const (char)* path)
 
 	do
 	{
-		int i;
 		int len = .my_strlen(path);
+		int i;
 
 		for (i = len - 1; i >= 0; --i) {
 			if ((path[i] == '\\') || (path[i] == '/')) {
@@ -203,11 +204,11 @@ public int filename_generate(char* filepath, const (char)* dir, const (char)* ba
 
 	do
 	{
-		int len = 0;
-
 		if (filepath != null) {
 			filepath[0] = '\0';
 		}
+
+		int len = 0;
 
 		if (dir != null) {
 			if (filepath != null) {

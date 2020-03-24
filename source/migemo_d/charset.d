@@ -267,13 +267,12 @@ public int charset_detect_buf(const char* buf, int len)
 	do
 	{
 		int sjis = 0;
-		int smode = 0;
 		int euc = 0;
-		int emode = 0;
-		int eflag = 0;
 		int utf8 = 0;
 		int umode = 0;
-		int ufailed = 0;
+		bool smode = false;
+		bool emode = false;
+		bool ufailed = false;
 
 		for (int i = 0; i < len; ++i) {
 			char c = buf[i];
@@ -284,22 +283,22 @@ public int charset_detect_buf(const char* buf, int len)
 					++sjis;
 				}
 
-				smode = 0;
+				smode = false;
 			} else if (((0x81 <= c) && (c <= 0x9F)) || ((0xE0 <= c) && (c <= 0xF0))) {
-				smode = 1;
+				smode = true;
 			}
 
 			// EUCであるかのチェック
-			eflag = (0xA1 <= c) && (c <= 0xFE);
+			bool eflag = (0xA1 <= c) && (c <= 0xFE);
 
 			if (emode) {
 				if (eflag) {
 					++euc;
 				}
 
-				emode = 0;
+				emode = false;
 			} else if (eflag) {
-				emode = 1;
+				emode = true;
 			}
 
 			// UTF8であるかのチェック
@@ -317,7 +316,7 @@ public int charset_detect_buf(const char* buf, int len)
 						} else if ((c & 0xFE) == 0xFC) {
 							umode = 5;
 						} else {
-							ufailed = 1;
+							ufailed = true;
 							--utf8;
 						}
 					}
@@ -328,7 +327,7 @@ public int charset_detect_buf(const char* buf, int len)
 					} else {
 						--utf8;
 						umode = 0;
-						ufailed = 1;
+						ufailed = true;
 					}
 				}
 
