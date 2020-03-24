@@ -415,7 +415,7 @@ public .mtree_p mnode_open(core.stdc.stdio.FILE* fp)
 
 	do
 	{
-		.mtree_p mtree = cast(.mtree_p)(core.stdc.stdlib.calloc(1, (*mtree).sizeof));
+		.mtree_p mtree = cast(.mtree_p)(core.stdc.stdlib.calloc(1, (*.mtree_p).sizeof));
 		mtree.active = mtree;
 
 		if ((mtree != null) && (fp != null)) {
