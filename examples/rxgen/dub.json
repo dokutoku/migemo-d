@@ -1,0 +1,12 @@
+{
+	"name": "rxgen",
+	"description": "migemo-d rxgen test.",
+	"authors": ["dokutoku"],
+	"copyright": "Copyright © 2019, dokutoku",
+	"license": "MIT",
+	"targetType": "executable",
+	"dependencies":
+	{
+		"migemo-d": {"path": "../../"}
+	}
+}
