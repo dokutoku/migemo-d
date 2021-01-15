@@ -6,9 +6,9 @@
 module migemo_d.romaji;
 
 
+private static import core.memory;
 private static import core.stdc.ctype;
 private static import core.stdc.stdio;
-private static import core.stdc.stdlib;
 private static import core.stdc.string;
 private static import migemo_d.charset;
 private static import migemo_d.wordbuf;
@@ -46,7 +46,7 @@ package .romanode* romanode_new()
 	{
 		++.n_romanode_new;
 
-		return cast(.romanode*)(core.stdc.stdlib.calloc(1, .romanode.sizeof));
+		return cast(.romanode*)(core.memory.pureCalloc(1, .romanode.sizeof));
 	}
 
 nothrow @nogc
@@ -63,8 +63,8 @@ package void romanode_delete(.romanode* node)
 			}
 
 			assert(node.value != null);
-			core.stdc.stdlib.free(node.value);
-			core.stdc.stdlib.free(node);
+			core.memory.pureFree(node.value);
+			core.memory.pureFree(node);
 			node = child;
 			++.n_romanode_delete;
 		}
@@ -257,12 +257,12 @@ package char* strdup_lower(const (char)* string_)
 	}
 
 extern (C)
-nothrow @nogc
+pure nothrow @trusted @nogc
 public .romaji* romaji_open()
 
 	do
 	{
-		return cast(.romaji*)(core.stdc.stdlib.calloc(1, .romaji.sizeof));
+		return cast(.romaji*)(core.memory.pureCalloc(1, .romaji.sizeof));
 	}
 
 extern (C)
@@ -278,16 +278,16 @@ public void romaji_close(.romaji* object)
 			}
 
 			if (object.fixvalue_xn != null) {
-				core.stdc.stdlib.free(object.fixvalue_xn);
+				core.memory.pureFree(object.fixvalue_xn);
 				object.fixvalue_xn = null;
 			}
 
 			if (object.fixvalue_xtu != null) {
-				core.stdc.stdlib.free(object.fixvalue_xtu);
+				core.memory.pureFree(object.fixvalue_xtu);
 				object.fixvalue_xtu = null;
 			}
 
-			core.stdc.stdlib.free(object);
+			core.memory.pureFree(object);
 		}
 	}
 
@@ -511,7 +511,7 @@ public char* romaji_convert2(.romaji* object, const (char)* string_, char** ppst
 
 		scope (exit) {
 			if (lower != null) {
-				core.stdc.stdlib.free(lower);
+				core.memory.pureFree(lower);
 				lower = null;
 			}
 
@@ -587,18 +587,18 @@ public char* romaji_convert(.romaji* object, const (char)* string_, char** ppsto
 	}
 
 extern (C)
-nothrow @nogc
+pure nothrow @nogc
 public void romaji_release(.romaji* object, char* string_)
 
 	do
 	{
 		if (string_ != null) {
-			core.stdc.stdlib.free(string_);
+			core.memory.pureFree(string_);
 		}
 	}
 
 extern (C)
-nothrow @nogc
+pure nothrow @nogc
 public void romaji_setproc_char2int(.romaji* object, .ROMAJI_PROC_CHAR2INT proc)
 
 	do
@@ -609,7 +609,7 @@ public void romaji_setproc_char2int(.romaji* object, .ROMAJI_PROC_CHAR2INT proc)
 	}
 
 extern (C)
-nothrow @nogc
+pure nothrow @nogc
 public void romaji_set_verbose(.romaji* object, int level)
 
 	do

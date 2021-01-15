@@ -7,8 +7,8 @@
 module migemo_test.main;
 
 
+private static import core.memory;
 private static import core.stdc.stdio;
-private static import core.stdc.stdlib;
 private static import core.stdc.string;
 private static import core.stdc.time;
 private static import migemo_d.migemo;

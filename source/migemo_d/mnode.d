@@ -7,9 +7,9 @@
 module migemo_d.mnode;
 
 
+private static import core.memory;
 private static import core.stdc.ctype;
 private static import core.stdc.stdio;
-private static import core.stdc.stdlib;
 private static import migemo_d.wordbuf;
 private static import migemo_d.wordlist;
 
@@ -92,7 +92,7 @@ package .mnode* mnode_new(.mtree_p mtree)
 		.mtree_p active = mtree.active;
 
 		if (active.used >= .MTREE_MNODE_N) {
-			active.next = cast(.mtree_p)(core.stdc.stdlib.calloc(1, (*active.next).sizeof));
+			active.next = cast(.mtree_p)(core.memory.pureCalloc(1, (*active.next).sizeof));
 			/* TODO: エラー処理 */
 			mtree.active = active.next;
 			active = active.next;
@@ -121,7 +121,7 @@ package void mnode_delete(.mnode* p)
 				p.next = null;
 			}
 
-			/*core.stdc.stdlib.free(p);*/
+			/*core.memory.pureFree(p);*/
 			p = child;
 			++.n_mnode_delete;
 		}
@@ -186,7 +186,7 @@ public void mnode_close(.mtree_p mtree)
 
 			while (mtree != null) {
 				.mtree_p next = mtree.next;
-				core.stdc.stdlib.free(mtree);
+				core.memory.pureFree(mtree);
 				mtree = next;
 			}
 		}
@@ -415,7 +415,7 @@ public .mtree_p mnode_open(core.stdc.stdio.FILE* fp)
 
 	do
 	{
-		.mtree_p mtree = cast(.mtree_p)(core.stdc.stdlib.calloc(1, (*.mtree_p).sizeof));
+		.mtree_p mtree = cast(.mtree_p)(core.memory.pureCalloc(1, (*.mtree_p).sizeof));
 		mtree.active = mtree;
 
 		if ((mtree != null) && (fp != null)) {

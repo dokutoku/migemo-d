@@ -7,7 +7,7 @@
 module migemo_d.wordbuf;
 
 
-private static import core.stdc.stdlib;
+private static import core.memory;
 private static import core.stdc.string;
 
 public alias wordbuf_t = ._wordbuf_t;
@@ -66,12 +66,12 @@ alias wordbuf_len = .wordbuf_last;
 enum WORDLEN_DEF = 64;
 
 extern (C)
-nothrow @nogc
+pure nothrow @trusted @nogc
 public .wordbuf_p wordbuf_open()
 
 	do
 	{
-		.wordbuf_p p = cast(.wordbuf_p)(core.stdc.stdlib.malloc(.wordbuf_t.sizeof));
+		.wordbuf_p p = cast(.wordbuf_p)(core.memory.pureMalloc(.wordbuf_t.sizeof));
 
 		if (p != null) {
 			debug {
@@ -79,7 +79,7 @@ public .wordbuf_p wordbuf_open()
 			}
 
 			p.len = .WORDLEN_DEF;
-			p.buf = cast(char*)(core.stdc.stdlib.malloc(p.len));
+			p.buf = cast(char*)(core.memory.pureMalloc(p.len));
 			p.last = 0;
 			p.buf[0] = '\0';
 		}
@@ -88,7 +88,7 @@ public .wordbuf_p wordbuf_open()
 	}
 
 extern (C)
-nothrow @nogc
+pure nothrow @trusted @nogc
 public void wordbuf_close(.wordbuf_p p)
 
 	in
@@ -103,10 +103,10 @@ public void wordbuf_close(.wordbuf_p p)
 			}
 
 			if (p.buf != null) {
-				core.stdc.stdlib.free(p.buf);
+				core.memory.pureFree(p.buf);
 			}
 
-			core.stdc.stdlib.free(p);
+			core.memory.pureFree(p);
 		}
 	}
 
@@ -130,7 +130,7 @@ public void wordbuf_reset(.wordbuf_p p)
  *	バッファの伸長。エラー時には0が帰る。
  *	高速化のために伸ばすべきかは呼出側で判断する。
  */
-nothrow @nogc
+pure nothrow @trusted @nogc
 package int wordbuf_extend(.wordbuf_p p, int req_len)
 
 	in
@@ -146,7 +146,7 @@ package int wordbuf_extend(.wordbuf_p p, int req_len)
 			newlen *= 2;
 		}
 
-		char* newbuf = cast(char*)(core.stdc.stdlib.realloc(p.buf, newlen));
+		char* newbuf = cast(char*)(core.memory.pureRealloc(p.buf, newlen));
 
 		if (newbuf == null) {
 			/*core.stdc.stdio.fprintf(core.stdc.stdio.stderr, "wordbuf_add(): failed to extend buffer\n");*/

@@ -6,9 +6,9 @@
 module migemo_d.migemo;
 
 
+private static import core.memory;
 private static import core.stdc.ctype;
 private static import core.stdc.stdio;
-private static import core.stdc.stdlib;
 private static import core.stdc.string;
 private static import migemo_d.charset;
 private static import migemo_d.filename;
@@ -301,7 +301,7 @@ export .migemo* migemo_open(const (char)* dict)
 	do
 	{
 		/* migemoオブジェクトと各メンバを構築 */
-		.migemo* obj = cast(.migemo*)(core.stdc.stdlib.calloc(1, .migemo.sizeof));
+		.migemo* obj = cast(.migemo*)(core.memory.pureCalloc(1, .migemo.sizeof));
 
 		if (obj == null) {
 			return null;
@@ -401,7 +401,7 @@ export void migemo_close(.migemo* obj)
 				obj.mtree = null;
 			}
 
-			core.stdc.stdlib.free(obj);
+			core.memory.pureFree(obj);
 			obj = null;
 		}
 	}
@@ -561,7 +561,7 @@ package void add_dubious_roma(.migemo* object, migemo_d.rxgen.rxgen* rx, char* q
 		}
 
 		size_t max = len + end_buf_len;
-		char* buf = cast(char*)(core.stdc.stdlib.malloc(max));
+		char* buf = cast(char*)(core.memory.pureMalloc(max));
 
 		if (buf == null) {
 			return;
@@ -569,7 +569,7 @@ package void add_dubious_roma(.migemo* object, migemo_d.rxgen.rxgen* rx, char* q
 
 		scope (exit) {
 			if (buf != null) {
-				core.stdc.stdlib.free(buf);
+				core.memory.pureFree(buf);
 				buf = null;
 			}
 		}
@@ -681,11 +681,11 @@ package int query_a_word(.migemo* object, char* query)
 		object.addword(object, query);
 
 		/* queryそのものでの辞書引き */
-		char* lower = cast(char*)(core.stdc.stdlib.malloc(len + 1));
+		char* lower = cast(char*)(core.memory.pureMalloc(len + 1));
 
 		scope (exit) {
 			if (lower != null) {
-				core.stdc.stdlib.free(lower);
+				core.memory.pureFree(lower);
 				lower = null;
 			}
 		}
@@ -852,13 +852,13 @@ export char* migemo_query(.migemo* object, const (char)* query)
  */
 //MIGEMO_CALLTYPE
 extern (C)
-nothrow @nogc
+pure nothrow @trusted @nogc
 export void migemo_release(.migemo* p, char* string_)
 
 	do
 	{
 		if (string_ != null) {
-			core.stdc.stdlib.free(string_);
+			core.memory.pureFree(string_);
 		}
 	}
 

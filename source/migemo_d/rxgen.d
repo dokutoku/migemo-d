@@ -7,8 +7,8 @@
 module migemo_d.rxgen;
 
 
+private static import core.memory;
 private static import core.stdc.stdio;
-private static import core.stdc.stdlib;
 private static import core.stdc.string;
 private static import migemo_d.wordbuf;
 
@@ -74,7 +74,7 @@ package .rnode* rnode_new()
 	{
 		++.n_rnode_new;
 
-		return cast(.rnode*)(core.stdc.stdlib.calloc(1, .rnode.sizeof));
+		return cast(.rnode*)(core.memory.pureCalloc(1, .rnode.sizeof));
 	}
 
 nothrow @nogc
@@ -90,7 +90,7 @@ package void rnode_delete(.rnode* node)
 				node.next = null;
 			}
 
-			core.stdc.stdlib.free(node);
+			core.memory.pureFree(node);
 			node = child;
 			++.n_rnode_delete;
 		}
@@ -211,7 +211,7 @@ public .rxgen* rxgen_open()
 
 	do
 	{
-		.rxgen* object = cast(.rxgen*)(core.stdc.stdlib.calloc(1, .rxgen.sizeof));
+		.rxgen* object = cast(.rxgen*)(core.memory.pureCalloc(1, .rxgen.sizeof));
 
 		if (object != null) {
 			.rxgen_setproc_char2int(object, null);
@@ -236,7 +236,7 @@ public void rxgen_close(.rxgen* object)
 		if (object != null) {
 			.rnode_delete(object.node);
 			object.node = null;
-			core.stdc.stdlib.free(object);
+			core.memory.pureFree(object);
 		}
 	}
 
@@ -444,13 +444,13 @@ public char* rxgen_generate(.rxgen* object)
 	}
 
 extern (C)
-nothrow @nogc
+pure nothrow @trusted @nogc
 public void rxgen_release(.rxgen* object, char* string_)
 
 	do
 	{
 		if (string_ != null) {
-			core.stdc.stdlib.free(string_);
+			core.memory.pureFree(string_);
 		}
 	}
 

@@ -7,7 +7,7 @@
 module migemo_d.wordlist;
 
 
-private static import core.stdc.stdlib;
+private static import core.memory;
 private static import core.stdc.string;
 
 public struct _wordlist_t
@@ -34,7 +34,7 @@ public .wordlist_p wordlist_open_len(const char* ptr_, int len)
 	do
 	{
 		if ((ptr_ != null) && (len >= 0)) {
-			.wordlist_p p = cast(.wordlist_p)(core.stdc.stdlib.malloc((*.wordlist_p).sizeof + len + 1));
+			.wordlist_p p = cast(.wordlist_p)(core.memory.pureMalloc((*.wordlist_p).sizeof + len + 1));
 
 			if (p != null) {
 				p.ptr_ = cast(char*)(p + 1);
@@ -78,7 +78,7 @@ public void wordlist_close(.wordlist_p p)
 			.wordlist_p next = p.next;
 
 			++.n_wordlist_close;
-			core.stdc.stdlib.free(p);
+			core.memory.pureFree(p);
 			p = next;
 		}
 	}
