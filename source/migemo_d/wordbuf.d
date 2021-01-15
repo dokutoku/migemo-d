@@ -15,6 +15,7 @@ public alias wordbuf_p = ._wordbuf_t*;
 
 public struct _wordbuf_t
 {
+package:
 	/**
 	 * bufに割り当てられているメモリ量 
 	 */
