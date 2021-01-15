@@ -191,10 +191,6 @@ extern (C)
 pure nothrow @trusted @nogc @live
 public int utf8_int2char(uint in_, char* out_)
 
-	in
-	{
-	}
-
 	do
 	{
 		if (in_ < 0x80) {

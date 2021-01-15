@@ -142,6 +142,7 @@ public int filename_extension(char* ext, const (char)* path)
 		}
 
 		if ((i < 0) || (i == (len - 1))) {
+			assert(ext != null);
 			ext[0] = '\0';
 
 			return 0;

@@ -473,6 +473,11 @@ public .mnode* mnode_query(.mtree_p mtree, const (char)* query)
 nothrow @nogc
 package void mnode_traverse_stub(.mnode* node, .MNODE_TRAVERSE_PROC proc, void* data)
 
+	in
+	{
+		assert(node != null);
+	}
+
 	do
 	{
 		while (true) {
