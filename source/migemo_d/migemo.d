@@ -79,7 +79,7 @@ public alias migemo = ._migemo;
 
 static immutable char[] VOWEL_CHARS = "aiueo\0";
 
-pure nothrow @trusted @nogc
+pure nothrow @nogc
 private int my_strlen(const (char)* s)
 
 	in
@@ -154,7 +154,7 @@ package migemo_d.mnode.mtree_p load_mtree_dictionary2(.migemo* obj, const (char)
 		return .load_mtree_dictionary(obj.mtree, dict_file);
 	}
 
-nothrow @nogc
+pure nothrow @nogc
 package void dircat(char* buf, const (char)* dir, const (char)* file)
 
 	in
@@ -899,7 +899,7 @@ export void migemo_release(.migemo* p, char* string_)
  */
 //MIGEMO_CALLTYPE
 extern (C)
-nothrow @nogc
+pure nothrow @nogc
 export int migemo_set_operator(.migemo* object, int index, const (char)* op)
 
 	do
@@ -927,7 +927,7 @@ export int migemo_set_operator(.migemo* object, int index, const (char)* op)
  */
 //MIGEMO_CALLTYPE
 extern (C)
-nothrow @nogc
+pure nothrow @trusted @nogc @live
 export const (char)* migemo_get_operator(.migemo* object, int index)
 
 	do
@@ -987,7 +987,7 @@ export void migemo_setproc_int2char(.migemo* object, .MIGEMO_PROC_INT2CHAR proc)
  */
 //MIGEMO_CALLTYPE
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 export int migemo_is_enable(.migemo* obj)
 
 	do

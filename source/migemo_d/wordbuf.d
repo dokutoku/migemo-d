@@ -34,7 +34,7 @@ debug {
 }
 
 pragma(inline, true)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public char* WORDBUF_GET(.wordbuf_p w)
 
 	in
@@ -48,7 +48,7 @@ public char* WORDBUF_GET(.wordbuf_p w)
 	}
 
 pragma(inline, true)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public int WORDBUF_LEN(.wordbuf_p w)
 
 	in
@@ -111,7 +111,7 @@ public void wordbuf_close(.wordbuf_p p)
 	}
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public void wordbuf_reset(.wordbuf_p p)
 
 	in
@@ -160,7 +160,7 @@ package int wordbuf_extend(.wordbuf_p p, int req_len)
 	}
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public int wordbuf_last(.wordbuf_p p)
 
 	in
@@ -174,7 +174,7 @@ public int wordbuf_last(.wordbuf_p p)
 	}
 
 extern (C)
-nothrow @nogc
+pure nothrow @trusted @nogc @live
 public int wordbuf_add(.wordbuf_p p, char ch)
 
 	in
@@ -204,7 +204,7 @@ public int wordbuf_add(.wordbuf_p p, char ch)
 	}
 
 extern (C)
-nothrow @nogc
+pure nothrow @nogc
 public int wordbuf_cat(.wordbuf_p p, const (char)* sz)
 
 	in
@@ -236,7 +236,7 @@ public int wordbuf_cat(.wordbuf_p p, const (char)* sz)
 	}
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public char* wordbuf_get(.wordbuf_p p)
 
 	in

@@ -28,7 +28,7 @@ public struct _mnode
 public enum MNODE_MASK_CH = 0x000000FF;
 
 pragma(inline, true)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public char MNODE_GET_CH(.mnode* p)
 
 	in
@@ -42,7 +42,7 @@ public char MNODE_GET_CH(.mnode* p)
 	}
 
 pragma(inline, true)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public void MNODE_SET_CH(.mnode* p, uint c)
 
 	in
@@ -426,7 +426,7 @@ public .mtree_p mnode_open(core.stdc.stdio.FILE* fp)
 	}
 
 version (none) {
-	pure nothrow @nogc
+	pure nothrow @trusted @nogc @live
 	package int mnode_size(.mnode* p)
 
 		do
@@ -435,7 +435,7 @@ version (none) {
 		}
 }
 
-pure nothrow @nogc
+pure nothrow @trusted @nogc @live
 package .mnode* mnode_query_stub(.mnode* node, const (char)* query)
 
 	in
@@ -462,7 +462,7 @@ package .mnode* mnode_query_stub(.mnode* node, const (char)* query)
 	}
 
 extern (C)
-pure nothrow @nogc
+pure nothrow @trusted @nogc @live
 public .mnode* mnode_query(.mtree_p mtree, const (char)* query)
 
 	do

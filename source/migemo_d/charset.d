@@ -25,7 +25,7 @@ public alias CHARSET_PROC_CHAR2INT = .charset_proc_char2int;
 public alias CHARSET_PROC_INT2CHAR = .charset_proc_int2char;
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public int cp932_char2int(const char* in_, uint* out_)
 
 	in
@@ -51,7 +51,7 @@ public int cp932_char2int(const char* in_, uint* out_)
 	}
 
 extern (C)
-pure nothrow @nogc
+pure nothrow @trusted @nogc @live
 public int cp932_int2char(uint in_, char* out_)
 
 	do
@@ -69,7 +69,7 @@ public int cp932_int2char(uint in_, char* out_)
 	}
 
 pragma(inline, true)
-pure nothrow @safe @nogc
+pure nothrow @safe @nogc @live
 bool IS_EUC_RANGE(char c)
 
 	do
@@ -78,7 +78,7 @@ bool IS_EUC_RANGE(char c)
 	}
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public int eucjp_char2int(const char* in_, uint* out_)
 
 	in
@@ -104,7 +104,7 @@ public int eucjp_char2int(const char* in_, uint* out_)
 	}
 
 extern (C)
-pure nothrow @nogc
+pure nothrow @trusted @nogc @live
 public int eucjp_int2char(uint in_, char* out_)
 
 	do
@@ -122,7 +122,7 @@ public int eucjp_int2char(uint in_, char* out_)
 		}
 	}
 
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 package int utf8_char2int_noascii(const char* in_, uint* out_)
 
 	in
@@ -164,7 +164,7 @@ package int utf8_char2int_noascii(const char* in_, uint* out_)
 	}
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public int utf8_char2int(const (char)* in_, uint* out_)
 
 	in
@@ -188,7 +188,7 @@ public int utf8_char2int(const (char)* in_, uint* out_)
 	}
 
 extern (C)
-pure nothrow @nogc
+pure nothrow @trusted @nogc @live
 public int utf8_int2char(uint in_, char* out_)
 
 	in
@@ -256,7 +256,7 @@ public int utf8_int2char(uint in_, char* out_)
 	}
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public int charset_detect_buf(const char* buf, int len)
 
 	in
@@ -350,7 +350,7 @@ public int charset_detect_buf(const char* buf, int len)
 	}
 
 extern (C)
-pure nothrow @nogc
+nothrow @nogc
 public void charset_getproc(int charset, .CHARSET_PROC_CHAR2INT* char2int, .CHARSET_PROC_INT2CHAR* int2char)
 
 	do

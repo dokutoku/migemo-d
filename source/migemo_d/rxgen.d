@@ -101,7 +101,7 @@ package void rnode_delete(.rnode* node)
  */
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 package int default_char2int(const char* in_, uint* out_)
 
 	in
@@ -119,7 +119,7 @@ package int default_char2int(const char* in_, uint* out_)
 	}
 
 extern (C)
-pure nothrow @nogc
+pure nothrow @trusted @nogc @live
 package int default_int2char(uint in_, char* out_)
 
 	do
@@ -227,8 +227,8 @@ public .rxgen* rxgen_open()
 		return object;
 	}
 
-nothrow @nogc
 extern (C)
+nothrow @nogc
 public void rxgen_close(.rxgen* object)
 
 	do
@@ -240,7 +240,7 @@ public void rxgen_close(.rxgen* object)
 		}
 	}
 
-nothrow @nogc
+pure nothrow @trusted @nogc @live
 package .rnode* search_rnode(.rnode* node, uint code)
 
 	do
@@ -473,7 +473,7 @@ public void rxgen_reset(.rxgen* object)
 		}
 	}
 
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 package char* rxgen_get_operator_stub(.rxgen* object, int index)
 
 	in
@@ -508,7 +508,7 @@ package char* rxgen_get_operator_stub(.rxgen* object, int index)
 	}
 
 extern (C)
-pure nothrow @trusted @nogc
+pure nothrow @trusted @nogc @live
 public const (char)* rxgen_get_operator(.rxgen* object, int index)
 
 	in
